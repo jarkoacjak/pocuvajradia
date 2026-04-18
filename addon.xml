@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.audio.pocuvam.radio" name="Počuvam Radia" version="1.0.0" provider-name="Jarko">
+<addon id="plugin.video.pocuvamradia" name="Počúvam Rádiá" version="1.0.0" provider-name="Jarko">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
-    <extension point="xbmc.python.pluginsource" library="announcements.py">
+    <extension point="xbmc.python.pluginsource" library="main.py">
         <provides>audio</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary lang="sk">Moje obľúbené rádiá</summary>
         <platform>all</platform>
+        <summary lang="sk_SK">Doplnok na počúvanie slovenských a českých rádií.</summary>
+        <description lang="sk_SK">Jednoduchý doplnok pre Kodi, ktorý umožňuje streamovať vaše obľúbené rádiostanice priamo v rozhraní prehrávača.</description>
+        <disclaimer lang="sk_SK">Autor nenesie zodpovednosť za obsah streamov.</disclaimer>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
     </extension>
 </addon>
