@@ -34,6 +34,8 @@ def main():
     # --- 2. ZOZNAM SLOVENSKÝCH RÁDIÍ ---
     elif params.get('country') == 'sk':
         radia_sk = [
+            {"nazov": "Rádio Basavel", "url": "https://stream.zeno.fm/6gd9c6yn4nhvv", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/basavel.png"},
+            {"nazov": "Rádio Aetter", "url": "http://stream.aetter.sk:8000/aetter", "logo": "https://cdn.radia.sk/_radia/loga/app/aetter.webp?v=1"},
             {"nazov": "Rádio 7", "url": "https://play.radio7.sk/128", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/7.png"},
             {"nazov": "Rádio 9", "url": "http://147.232.191.167:8000/high.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/9.png"},
             {"nazov": "PARTY RADIO", "url": "https://mpc1.mediacp.eu/stream/partyradio", "logo": "http://files.exoweb.eu/13/40/13404079-0cdd-42be-88cd-e832e3e5542c.jpeg"},
@@ -42,19 +44,12 @@ def main():
             {"nazov": "Rádio Rock", "url": "https://stream.bauermedia.sk/rock-hi.mp3", "logo": "https://radiorock.sk/intro-v2.png"},
             {"nazov": "Rádio Maria Slovakia", "url": "https://dreamsiteradiocp5.com/proxy/radiomariaslomp3?mp=/stream.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-maria-slovensko/play_250_250.webp"},
             {"nazov": "Rádio Lumen", "url": "https://audio.lumen.sk/live128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/lumen.png"},
-            {"nazov": "Na vlne Novohradu", "url": "https://radioserver.online/proxy/navlnenovohradu/novohradHQ.mp3", "logo": "https://www.radia.sk/_radia/loga/app/na-vlne-novohradu.webp?v=2"},
+            {"nazov": "Na vlne Novohradu", "url": "https://radioserver.online/proxy/navlnenovohradu/novohradHQ.mp3", "logo": "https://www.radia.sk/_radia/loga/app/navlnenovohradu.webp?v=1"},
             {"nazov": "Na vlne Liptova", "url": "http://radioserver.online:8009/hq.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/na-vlne-liptova.png"},
             {"nazov": "Mirjam Radio", "url": "https://dreamsiteradiocp5.com/proxy/rmslo?mp=/stream", "logo": "https://www.radia.sk/_radia/loga/app/mirjam.webp?v=1"},
             {"nazov": "METALSCENA netRADIO", "url": "https://listen.radioking.com/radio/263218/stream/308365", "logo": "https://www.radia.sk/_radia/loga/coverflow/metalscena.png"},
             {"nazov": "Mars Dance Rádio", "url": "https://stream.zenolive.com/683gf5xrxfeuv?1686916511841", "logo": "https://www.radia.sk/_radia/loga/app/mars-dance.webp?v=2"},
             {"nazov": "HITRÁDIO SLOVAKIA", "url": "https://hitradioslovakia.stream.laut.fm/hitradioslovakia", "logo": "https://myonlineradio.sk/public/uploads/radio_img/hitradio-slovakia/play_250_250.webp"},
-            {"nazov": "G - Rádio", "url": "http://88.212.34.18:8000/aacphighband.aac", "logo": "https://www.radia.sk/_radia/loga/coverflow/g-radio.png"},
-            {"nazov": "Fun Rádio Mileniálky", "url": "https://stream.funradio.sk:8000/milenialky128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/fun-milenialky.png"},
-            {"nazov": "Fun Rádio Leto", "url": "https://stream.funradio.sk:8000/summer128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/fun-letne-hity.png"},
-            {"nazov": "Fun Rádio Chill", "url": "https://stream.funradio.sk/chill128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/fun-chill.png"},
-            {"nazov": "Fun Rádio Dance", "url": "http://stream.funradio.sk:8000/dance128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/fun-dance.png"},
-            {"nazov": "Fun Rádio CZ - SK", "url": "http://stream.funradio.sk:8000/cs128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/fun-cz-sk.png"},
-            {"nazov": "Fun Rádio 80s - 90s", "url": "http://stream.funradio.sk:8000/80-90-128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/fun-80-90-roky.png"},
             {"nazov": "BB FM", "url": "http://stream.bbfm.sk:8000/bbfm128.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/bb-fm-radio/play_250_250.webp"},
             {"nazov": "Rádio Regina - Západ", "url": "https://icecast.stv.livebox.sk/regina-ba_128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/regina-zapad.png"},
             {"nazov": "Rádio Regina - Stred", "url": "https://icecast.stv.livebox.sk/regina-bb_128.mp3", "logo": "https://www.radia.sk/_radia/loga/app/regina-stred.webp?v=2"},
@@ -111,4 +106,4 @@ def zobraz_radia(handle, zoznam):
 
 if __name__ == '__main__':
     main()
-    
+
