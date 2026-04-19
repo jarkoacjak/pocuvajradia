@@ -34,6 +34,8 @@ def main():
     # --- 2. ZOZNAM SLOVENSKÝCH RÁDIÍ ---
     elif params.get('country') == 'sk':
         radia_sk = [
+            {"nazov": "Rádio Jemné Chillout", "url": "https://stream.bauermedia.sk/chillout-hi.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/jemne-chillout.png"},
+            {"nazov": "Rádio Junior", "url": "https://icecast.stv.livebox.sk/junior_128.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-junior/fb_cover.jpg"},
             {"nazov": "Rádio Janko Hraško", "url": "http://78.24.9.110:31088/;", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-janko-hrasko/play_250_250.webp"},
             {"nazov": "Rádio Jazz", "url": "http://stream.sepia.sk:8000/jazz192.mp3", "logo": "http://radiojazz.sk/image/logo.png"},
             {"nazov": "Rádio FanWaves", "url": "https://stream.zeno.fm/gtkbdehhekftv", "logo": "https://images.zeno.fm/ZtUvkDMtkuf8ykYmi9VmIi3zRsaaaKixAoEEe6F5Tzk/rs:fill:288:288/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYzFkZDQwMDYtMjJkNC00NjYyLWIyZGMtZjNjNTVlYmY2YWVlL2ltYWdlLz91PTE3NTUzNjM0NjEwMDA.webp"},
