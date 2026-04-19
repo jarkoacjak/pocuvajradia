@@ -34,6 +34,8 @@ def main():
     # --- 2. ZOZNAM SLOVENSKÝCH RÁDIÍ ---
     elif params.get('country') == 'sk':
         radia_sk = [
+            {"nazov": "Rádio KIKS - Big 90s", "url": "https://online.radiokiks.sk:8000/kiks_big90s.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/kiks-big-90s.png"},
+            {"nazov": "Rádio KIKS - Rock Music", "url": "https://online.radiokiks.sk:8000/kiks_rock.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/kiks-rock-music.png"},
             {"nazov": "Rádio KIKS", "url": "https://online.radiokiks.sk:8000/kiks_hq.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/kiks.webp?v=1"},
             {"nazov": "Rádio KIKS - Big 80s", "url": "https://online.radiokiks.sk:8000/kiks_big80s.mp3", "logo": "https://radiokiks.net/wp-content/uploads/2024/08/Logo_BIG_80.png"},
             {"nazov": "Rádio Jemné Chillout", "url": "https://stream.bauermedia.sk/chillout-hi.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/jemne-chillout.png"},
