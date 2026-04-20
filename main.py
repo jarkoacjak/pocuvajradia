@@ -34,6 +34,8 @@ def main():
     # --- 2. ZOZNAM SLOVENSKÝCH RÁDIÍ ---
     elif params.get('country') == 'sk':
         radia_sk = [
+            {"nazov": "Rádio Piešťany", "url": "https://solid33.streamupsolutions.com/proxy/gktiemqb/stream", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-piestany/play_250_250.webp"},
+            {"nazov": "Rádio Pohoda", "url": "https://audio.radiopohoda.com:8000/stream", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-pohoda/fb_cover.jpg"},
             {"nazov": "Rádio Paráda", "url": "https://extra.mediacp.eu/stream/RadioParada,o.z.", "logo": "https://www.radioparada.sk/wp-content/uploads/2021/12/LOGO-PARADA-NEW-1024x1024.png"},
             {"nazov": "Rádio Patria", "url": "https://icecast.stv.livebox.sk/patria_128.mp3", "logo": "https://upload.wikimedia.org/wikipedia/commons/8/85/R%C3%A1dio_PATRIA_LOGO.jpg"},
             {"nazov": "Rádio Modra", "url": "http://185.98.208.12:8000/;", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/modra.png"},
@@ -131,4 +133,4 @@ def zobraz_radia(handle, zoznam):
 
 if __name__ == '__main__':
     main()
-        
+
