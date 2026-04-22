@@ -14,8 +14,10 @@ def main():
     except:
         return
 
-    # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
+    # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ (Všetky stanice) ---
     radia_sk = [
+        {"nazov": "Rádio Pyramída", "url": "https://icecast.stv.livebox.sk/pyramida_128.mp3", "logo": "https://www.radiomix.sk/wp-content/uploads/2024/01/radio-pyramida-560x560.png"},
+        {"nazov": "Rádio Rebeca", "url": "https://mpc2.mediacp.eu:8200/rebecaweb", "logo": "https://cdn.radia.sk/_radia/loga/app/rebeca.webp?v=2"},
         {"nazov": "Rádio Pohoda 2", "url": "http://mpc1.mediacp.eu:18111/stream", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/pohoda2.png"},
         {"nazov": "Rádio Pokoj", "url": "http://radioserver.online:8822/;", "logo": "https://cdn.radia.sk/_radia/loga/app/pokoj.webp?v=2"},
         {"nazov": "Rádio Piešťany", "url": "https://solid33.streamupsolutions.com/proxy/gktiemqb/stream", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-piestany/play_250_250.webp"},
@@ -103,7 +105,7 @@ def main():
             xbmcplugin.addDirectoryItem(handle, build_url(p), li, True)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- 2. PODMENU: ŠTÁTY (Zobrazia sa hneď vlajky) ---
+    # --- 2. PODMENU: ŠTÁTY ---
     elif params.get('action') == 'list_states':
         states = [
             ("🇸🇰 [B]Slovenské Rádiá[/B]", {'country': 'sk'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/1200px-Flag_of_Slovakia.svg.png"),
@@ -121,7 +123,6 @@ def main():
         favs = [
             ("⭐ [B]TOP Slovensko 10[/B]", {'action': 'top10_sk'}),
             ("⭐ [B]TOP Česko 10[/B]", {'action': 'top10_cz'}),
-            ("⭐ [B]TOP Maďarsko 10[/B]", {'action': 'msg', 'text': 'Pripravujeme sa'})
         ]
         for label, p in favs:
             li = xbmcgui.ListItem(label=label)
@@ -130,7 +131,7 @@ def main():
 
     # --- 4. FUNKCIA: VYHĽADÁVANIE (OPRAVENÉ) ---
     elif params.get('action') == 'search':
-        kb = xbmcgui.Dialog().input('Zadajte názov rádia', type=xbmcgui.INPUT_ALPHANUM)
+        kb = xbmcgui.Dialog().input('Hľadať rádio', type=xbmcgui.INPUT_ALPHANUM)
         if kb:
             query = kb.lower()
             vsetky = radia_sk + radia_cz
@@ -141,28 +142,24 @@ def main():
                 xbmcgui.Dialog().ok("Hľadanie", "Nenašli sa žiadne výsledky pre: " + kb)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- 5. OSTATNÉ AKCIE ---
-    elif params.get('action') == 'latest':
-        zobraz_radia(handle, radia_sk[:5]) # Ukáže posledných 5 pridaných
-
-    elif params.get('action') == 'top10_sk':
-        zobraz_radia(handle, radia_sk[-10:]) # Ukáže posledných 10 zo zoznamu
-
-    elif params.get('action') == 'top10_cz':
-        zobraz_radia(handle, radia_cz[:10])
-
-    elif params.get('action') == 'msg':
-        xbmcgui.Dialog().ok("Informácia", params.get('text', 'Pripravujeme sa'))
-        xbmcplugin.endOfDirectory(handle)
-
-    # --- 6. KRAJINY (Zobrazia sa všetky rádiá v zozname) ---
+    # --- 5. ZOBRAZENIE RÁDIÍ ---
     elif params.get('country') == 'sk':
         zobraz_radia(handle, radia_sk)
 
     elif params.get('country') == 'cz':
         zobraz_radia(handle, radia_cz)
 
-# Univerzálna funkcia na zobrazenie rádií
+    elif params.get('action') == 'latest':
+        # Ukáže posledných 5 pridaných (Pyramída, Rebeca...)
+        zobraz_radia(handle, radia_sk[:5])
+
+    elif params.get('action') == 'top10_sk':
+        zobraz_radia(handle, radia_sk[-10:])
+
+    elif params.get('action') == 'msg':
+        xbmcgui.Dialog().ok("Informácia", params.get('text', 'Pripravujeme sa'))
+        xbmcplugin.endOfDirectory(handle)
+
 def zobraz_radia(handle, zoznam):
     for radio in zoznam:
         li = xbmcgui.ListItem(label=radio["nazov"])
