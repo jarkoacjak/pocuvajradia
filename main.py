@@ -14,8 +14,10 @@ def main():
     except:
         return
 
-    # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ (Všetky stanice) ---
+    # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
     radia_sk = [
+        {"nazov": "Rádio Rock SV", "url": "https://s2.myradiostream.com/:4870/listen.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/rock-sv.png"},
+        {"nazov": "Rádio Sity", "url": "https://radiosity.online:8000/aac", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/sity.png"},
         {"nazov": "Rádio Pyramída", "url": "https://icecast.stv.livebox.sk/pyramida_128.mp3", "logo": "https://www.radiomix.sk/wp-content/uploads/2024/01/radio-pyramida-560x560.png"},
         {"nazov": "Rádio Rebeca", "url": "https://mpc2.mediacp.eu:8200/rebecaweb", "logo": "https://cdn.radia.sk/_radia/loga/app/rebeca.webp?v=2"},
         {"nazov": "Rádio Pohoda 2", "url": "http://mpc1.mediacp.eu:18111/stream", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/pohoda2.png"},
@@ -150,11 +152,10 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
-        # Ukáže posledných 5 pridaných (Pyramída, Rebeca...)
-        zobraz_radia(handle, radia_sk[:5])
+        zobraz_radia(handle, radia_sk[:5]) # Rock SV a Sity sú teraz na začiatku
 
     elif params.get('action') == 'top10_sk':
-        zobraz_radia(handle, radia_sk[-10:])
+        zobraz_radia(handle, radia_sk[:10])
 
     elif params.get('action') == 'msg':
         xbmcgui.Dialog().ok("Informácia", params.get('text', 'Pripravujeme sa'))
