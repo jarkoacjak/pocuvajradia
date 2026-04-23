@@ -16,6 +16,8 @@ def main():
 
     # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
     radia_sk = [
+        {"nazov": "Rádio Tlis", "url": "https://stream.tlis.sk/tlis.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/tlis.png"},
+        {"nazov": "Rádio Topoľčany", "url": "http://80.242.44.249:8000/;", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/topolcany.png"},
         {"nazov": "Radio Slovakia International", "url": "https://icecast.stv.livebox.sk/rsi_128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/slovakia-international.png"},
         {"nazov": "Rádio Šírava", "url": "http://stream.sepia.sk:8000/radiosirava.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/sirava.webp?v=2"},
         {"nazov": "Rádio Rock SV", "url": "https://s2.myradiostream.com/:4870/listen.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/rock-sv.png"},
@@ -154,7 +156,7 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
-        zobraz_radia(handle, radia_sk[:5]) # Zobrazí prvé v zozname (RSI, Šírava...)
+        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Tlis, Topoľčany...)
 
     elif params.get('action') == 'top10_sk':
         zobraz_radia(handle, radia_sk[-10:])
