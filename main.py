@@ -16,6 +16,8 @@ def main():
 
     # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
     radia_sk = [
+        {"nazov": "Rádio X - Folklore X", "url": "https://stream.radiox.sk:8443/ludovky.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
+        {"nazov": "Rádio X - Chillout X", "url": "https://stream.radiox.sk:8443/chillout.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
         {"nazov": "Rádio X - Dance X", "url": "https://stream.radiox.sk:8443/dance.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
         {"nazov": "Rádio X - DNB X", "url": "https://stream.radiox.sk:8443/dnb.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
         {"nazov": "Rádio X", "url": "https://stream.radiox.sk:8443/radiox_256.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
@@ -166,7 +168,7 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
-        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Dance X, DNB X...)
+        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Folklore X, Chillout X...)
 
     elif params.get('action') == 'top10_sk':
         zobraz_radia(handle, radia_sk[-10:])
@@ -186,4 +188,4 @@ def zobraz_radia(handle, zoznam):
 
 if __name__ == '__main__':
     main()
-    
+
