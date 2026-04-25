@@ -16,6 +16,8 @@ def main():
 
     # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
     radia_sk = [
+        {"nazov": "Rádio X", "url": "https://stream.radiox.sk:8443/radiox_256.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
+        {"nazov": "Rádio X - Alternative X", "url": "https://stream.radiox.sk:8443/alternative.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
         {"nazov": "Rádio Vlna - Classic Rock", "url": "https://stream.radiovlna.sk/rock-hi.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/vlna-classic-rock.png"},
         {"nazov": "Rádio Vlna - Oldies Párty", "url": "https://stream.radiovlna.sk:8000/party-hi.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/vlna-oldies-party.png"},
         {"nazov": "Rádio Vlna - 60's & 70s", "url": "https://stream.radiovlna.sk/gold-hi.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/vlna-60s-70s.png"},
@@ -162,7 +164,7 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
-        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Classic Rock, Oldies Párty...)
+        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Rádio X, Alternative X...)
 
     elif params.get('action') == 'top10_sk':
         zobraz_radia(handle, radia_sk[-10:])
