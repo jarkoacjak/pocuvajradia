@@ -16,6 +16,8 @@ def main():
 
     # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
     radia_sk = [
+        {"nazov": "Rádio X - Metal X", "url": "https://stream.radiox.sk:8443/metal.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
+        {"nazov": "Rádio X - Oldies X", "url": "https://stream.radiox.sk:8443/oldies.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
         {"nazov": "Rádio X - Folklore X", "url": "https://stream.radiox.sk:8443/ludovky.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
         {"nazov": "Rádio X - Chillout X", "url": "https://stream.radiox.sk:8443/chillout.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
         {"nazov": "Rádio X - Dance X", "url": "https://stream.radiox.sk:8443/dance.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-x/play_250_250.webp"},
@@ -65,7 +67,7 @@ def main():
         {"nazov": "Rádio Beta Hráme jubilantom", "url": "http://109.71.67.102:8000/beta_jubilanti.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/beta-hrame-jubilantom.png"},
         {"nazov": "Rádio Bela", "url": "http://65.109.81.84:8855/live", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/bela.png"},
         {"nazov": "Rádio Best FM", "url": "https://stream3.bestfm.sk:8000/160.aac", "logo": "https://bestfm.sk/wp-content/uploads/2021/09/logo_transparent.png"},
-        {"nazov": "Rádio Basavel", "url": "https://stream.zeno.fm/6gd9c6yn4nhvv", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/basavel.png"},
+        {"nazov": "Rádio Basavel", "url": "https://stream.zeno.fm/6gd9c6yn4nhvv", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/connection.png"},
         {"nazov": "Rádio Aetter", "url": "http://stream.aetter.sk:8000/aetter", "logo": "https://cdn.radia.sk/_radia/loga/app/aetter.webp?v=1"},
         {"nazov": "Rádio 7", "url": "https://play.radio7.sk/128", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/7.png"},
         {"nazov": "Rádio 9", "url": "http://147.232.191.167:8000/high.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/9.png"},
@@ -168,7 +170,7 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
-        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Folklore X, Chillout X...)
+        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Metal X, Oldies X...)
 
     elif params.get('action') == 'top10_sk':
         zobraz_radia(handle, radia_sk[-10:])
@@ -188,4 +190,4 @@ def zobraz_radia(handle, zoznam):
 
 if __name__ == '__main__':
     main()
-
+    
