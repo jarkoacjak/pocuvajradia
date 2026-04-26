@@ -16,6 +16,8 @@ def main():
 
     # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
     radia_sk = [
+        {"nazov": "Rádio SUB FM", "url": "https://stream.subfm.sk/subfm", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/sub-fm.png"},
+        {"nazov": "Rádio Ticho", "url": "https://solid1.streamupsolutions.com/proxy/rpiipoer/tiche", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/tiche.png"},
         {"nazov": "Sky Rádio", "url": "http://stream.skyradio.sk:8000/sky128", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/sky.png"},
         {"nazov": "Rádio Slobodný Vysielač", "url": "https://vysielanie.online/radio/8020/SV128.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/slobodny-vysielac/play_250_250.webp"},
         {"nazov": "Rádio Zábava", "url": "https://stream.zeno.fm/eyac00cx1nhvv", "logo": "https://cdn.radia.sk/_radia/loga/app/zabava.webp?v=2"},
@@ -174,7 +176,7 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
-        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Sky, Slobodný Vysielač...)
+        zobraz_radia(handle, radia_sk[:5]) # Prvé v zozname (Sub FM, Ticho...)
 
     elif params.get('action') == 'top10_sk':
         zobraz_radia(handle, radia_sk[-10:])
@@ -187,11 +189,4 @@ def zobraz_radia(handle, zoznam):
     for radio in zoznam:
         li = xbmcgui.ListItem(label=radio["nazov"])
         li.setArt({'thumb': radio["logo"], 'icon': radio["logo"]})
-        li.setInfo('audio', {'title': radio["nazov"], 'mediatype': 'music'})
-        li.setProperty('IsPlayable', 'true')
-        xbmcplugin.addDirectoryItem(handle, radio["url"], li, False)
-    xbmcplugin.endOfDirectory(handle)
-
-if __name__ == '__main__':
-    main()
-
+        li.setInf
