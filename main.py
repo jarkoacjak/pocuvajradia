@@ -19,6 +19,8 @@ def main():
 
     # --- KOMPLETNÁ DATABÁZA RÁDIÍ ---
     radia_sk = [
+        {"nazov": "Fun Rádio Dance", "url": "http://stream.funradio.sk:8000/dance128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/fun-dance.png"},
+        {"nazov": "Fun Rádio Chill", "url": "https://stream.funradio.sk/chill128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/fun-chill.png"},
         {"nazov": "Fun Rádio 80's - 90's", "url": "http://stream.funradio.sk:8000/80-90-128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/nadpis/fun-80-90-roky.webp?v=1"},
         {"nazov": "Fun Rádio CZ - SK", "url": "http://stream.funradio.sk:8000/cs128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/fun-cz-sk.png"},
         {"nazov": "V2Beat Radio", "url": "https://de1se01.v2beat.live/icecast.audio", "logo": "https://app.v2beat.com/images/viib-v2beat-logo-neon.jpg"},
