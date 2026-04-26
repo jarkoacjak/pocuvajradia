@@ -80,7 +80,7 @@ def main():
         {"nazov": "Rádio Beta Hráme jubilantom", "url": "http://109.71.67.102:8000/beta_jubilanti.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/beta-hrame-jubilantom.png"},
         {"nazov": "Rádio Bela", "url": "http://65.109.81.84:8855/live", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/bela.png"},
         {"nazov": "Rádio Best FM", "url": "https://stream3.bestfm.sk:8000/160.aac", "logo": "https://bestfm.sk/wp-content/uploads/2021/09/logo_transparent.png"},
-        {"nazov": "Rádio Basavel", "url": "https://stream.zeno.fm/6gd9c6yn4nhvv", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/connection.png"},
+        {"nazov": "Rádio Basavel", "url": "https://stream.zeno.fm/6gd9c6yn4nhvv", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/basavel.png"},
         {"nazov": "Rádio Aetter", "url": "http://stream.aetter.sk:8000/aetter", "logo": "https://cdn.radia.sk/_radia/loga/app/aetter.webp?v=1"},
         {"nazov": "Rádio 7", "url": "https://play.radio7.sk/128", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/7.png"},
         {"nazov": "Rádio 9", "url": "http://147.232.191.167:8000/high.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/9.png"},
@@ -90,7 +90,7 @@ def main():
         {"nazov": "Rádio Rock", "url": "https://stream.bauermedia.sk/rock-hi.mp3", "logo": "https://radiorock.sk/intro-v2.png"},
         {"nazov": "Rádio Maria Slovakia", "url": "https://dreamsiteradiocp5.com/proxy/radiomariaslomp3?mp=/stream.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-maria-slovensko/play_250_250.webp"},
         {"nazov": "Rádio Lumen", "url": "https://audio.lumen.sk/live128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/lumen.png"},
-        {"nazov": "Na vlne Novohradu", "url": "https://radioserver.online/proxy/navlnenovohradu/novohradHQ.mp3", "logo": "https://www.radia.sk/_radia/loga/app/navlnenovohradu.webp?v=1"},
+        {"nazov": "Na vlne Novohradu", "url": "https://radioserver.online/proxy/navlnenovohradu/novohradHQ.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/na-vlne-novohradu.webp?v=2"},
         {"nazov": "Na vlne Liptova", "url": "http://radioserver.online:8009/hq.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/na-vlne-liptova.png"},
         {"nazov": "Mirjam Radio", "url": "https://dreamsiteradiocp5.com/proxy/rmslo?mp=/stream", "logo": "https://www.radia.sk/_radia/loga/app/mirjam.webp?v=1"},
         {"nazov": "METALSCENA netRADIO", "url": "https://listen.radioking.com/radio/263218/stream/308365", "logo": "https://www.radia.sk/_radia/loga/coverflow/metalscena.png"},
@@ -141,12 +141,17 @@ def main():
     elif params.get('action') == 'list_states':
         states = [
             ("🇸🇰 [B]Slovenské Rádiá[/B]", {'country': 'sk'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/1200px-Flag_of_Slovakia.svg.png"),
-            ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png")
+            ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png"),
+            ("🇭🇺 [I]Maďarské Rádiá (Pripravujeme)[/I]", {'action': 'coming_soon'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_Hungary.svg/1200px-Flag_of_Hungary.svg.png")
         ]
         for label, p, icon in states:
             li = xbmcgui.ListItem(label=label)
             li.setArt({'icon': icon, 'thumb': icon})
             xbmcplugin.addDirectoryItem(handle, build_url(p), li, True)
+        xbmcplugin.endOfDirectory(handle)
+
+    elif params.get('action') == 'coming_soon':
+        xbmcgui.Dialog().ok("Informácia", "Maďarské rádiá pre vás momentálne pripravujeme.")
         xbmcplugin.endOfDirectory(handle)
 
     elif params.get('action') == 'list_fav':
@@ -169,7 +174,9 @@ def main():
                 zobraz_radia(handle, vysledky)
             else:
                 xbmcgui.Dialog().ok("Hľadanie", "Nenašli sa výsledky pre: " + kb)
-        xbmcplugin.endOfDirectory(handle)
+        xbmcplugin.endOfDirec
+
+xbmcplugin.endOfDirectory(handle)
 
     elif params.get('country') == 'sk':
         zobraz_radia(handle, radia_sk)
