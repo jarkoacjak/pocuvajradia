@@ -17,7 +17,7 @@ def main():
     except (IndexError, ValueError):
         return
 
-    # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ (Všetky stanice vrátené) ---
+    # --- KOMPLETNÁ DATABÁZA RÁDIÍ ---
     radia_sk = [
         {"nazov": "V2Beat Radio", "url": "https://de1se01.v2beat.live/icecast.audio", "logo": "https://app.v2beat.com/images/viib-v2beat-logo-neon.jpg"},
         {"nazov": "Záhorácke Rádio", "url": "http://live.zahorackeradio.sk:8080/zr128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/zahoracke.webp?v=1"},
@@ -125,7 +125,7 @@ def main():
         {"nazov": "Evropa 2", "url": "https://ice.actve.net/fm-evropa2-128", "logo": "https://www.evropa2.cz/wp-content/themes/evropa2/assets/img/logo.png"}
     ]
 
-    # --- HLAVNÉ MENU ---
+    # --- LOGIKA MENU ---
     if not params:
         menu_items = [
             ("🌍 [B]ŠTÁTY[/B]", {'action': 'list_states'}),
@@ -138,7 +138,6 @@ def main():
             xbmcplugin.addDirectoryItem(handle, build_url(p), li, True)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- PODMENU: ŠTÁTY ---
     elif params.get('action') == 'list_states':
         states = [
             ("🇸🇰 [B]Slovenské Rádiá[/B]", {'country': 'sk'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/1200px-Flag_of_Slovakia.svg.png"),
@@ -150,7 +149,6 @@ def main():
             xbmcplugin.addDirectoryItem(handle, build_url(p), li, True)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- PODMENU: OBLÚBENÉ ---
     elif params.get('action') == 'list_fav':
         favs = [
             ("⭐ [B]TOP Slovensko 10[/B]", {'action': 'top10_sk'}),
@@ -161,7 +159,6 @@ def main():
             xbmcplugin.addDirectoryItem(handle, build_url(p), li, True)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- FUNKCIA: VYHĽADÁVANIE ---
     elif params.get('action') == 'search':
         kb = xbmcgui.Dialog().input('Hľadať rádio', type=xbmcgui.INPUT_ALPHANUM)
         if kb:
@@ -174,7 +171,6 @@ def main():
                 xbmcgui.Dialog().ok("Hľadanie", "Nenašli sa výsledky pre: " + kb)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- ZOBRAZENIE RÁDIÍ ---
     elif params.get('country') == 'sk':
         zobraz_radia(handle, radia_sk)
 
@@ -182,3 +178,19 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
+        zobraz_radia(handle, radia_sk[:10])
+
+    elif params.get('action') == 'top10_sk':
+        zobraz_radia(handle, radia_sk[-10:])
+
+def zobraz_radia(handle, zoznam):
+    for radio in zoznam:
+        li = xbmcgui.ListItem(label=radio["nazov"])
+        li.setArt({'thumb': radio["logo"], 'icon': radio["logo"]})
+        li.setInfo('audio', {'title': radio["nazov"], 'mediatype': 'music'})
+        li.setProperty('IsPlayable', 'true')
+        xbmcplugin.addDirectoryItem(handle, radio["url"], li, False)
+    xbmcplugin.endOfDirectory(handle)
+
+if __name__ == '__main__':
+    main()
