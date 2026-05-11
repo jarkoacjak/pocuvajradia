@@ -126,6 +126,8 @@ def main():
     ]
 
     radia_cz = [
+        {"nazov": "Audio Kostel", "url": "https://evcast.mediacp.eu:1585/stream", "logo": "https://lh3.googleusercontent.com/proxy/audio-kostel-placeholder"},
+        {"nazov": "Bikers Radio Doupě", "url": "http://icecast7.play.cz/bikersradiodoupe128.mp3", "logo": "https://play-lh.googleusercontent.com/PWF_HBiICK_jfMX1nV__AB3LGECJqImhO4XnBlivN-bmhmrpuCAC7ScU7DCagjrqrw"},
         {"nazov": "Alternative Times Radio", "url": "http://ice3.abradio.cz/alternative128.mp3", "logo": "https://radia.cz/media/images/0001/01/48cd28c2dab73f011e8e64dc0919ef57a7374883.png"},
         {"nazov": "Astra Rádio", "url": "https://astra.icecast.cz/", "logo": "https://myonlineradio.cz/public/uploads/radio_img/astra-radio/fb_cover.jpg"},
         {"nazov": "Rádio Kiss", "url": "https://n25a-eu.rcs.revma.com/asn0cmvb938uv", "logo": "https://i1.sndcdn.com/artworks-000055555247-hukx9y-t500x500.jpg"},
@@ -150,7 +152,7 @@ def main():
         states = [
             ("🇸🇰 [B]Slovenské Rádiá[/B]", {'country': 'sk'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/1200px-Flag_of_Slovakia.svg.png"),
             ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png"),
-            ("🇭🇺 [I]Maďarské Rádiá (Pripravujeme)[/I]", {'action': 'coming_soon'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_Hungary.svg/1200px-Flag_of_Hungar.svg.png")
+            ("🇭🇺 [I]Maďarské Rádiá (Pripravujeme)[/I]", {'action': 'coming_soon'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_Hungary.svg/1200px-Flag_of_Hungary.svg.png")
         ]
         for label, p, icon in states:
             li = xbmcgui.ListItem(label=label)
@@ -191,6 +193,7 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
+        # Zobrazí mix posledných pridaných
         zobraz_radia(handle, (radia_sk[:5] + radia_cz[:5]))
 
     elif params.get('action') == 'top10_sk':
@@ -206,5 +209,4 @@ def zobraz_radia(handle, zoznam):
     xbmcplugin.endOfDirectory(handle)
 
 if __name__ == '__main__':
-    main()
-             
+    main() 
