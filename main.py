@@ -126,7 +126,9 @@ def main():
     ]
 
     radia_cz = [
-        {"nazov": "Audio Kostel", "url": "https://evcast.mediacp.eu:1585/stream", "logo": "https://lh3.googleusercontent.com/proxy/audio-kostel-placeholder"},
+        {"nazov": "BlackFM Rádio", "url": "http://icecast2.play.cz/blackfm-radio-192.mp3", "logo": "https://blackfm.cz/image/freestyle/blackfm_logo_www.jpg"},
+        {"nazov": "BlueRadio", "url": "https://stream.blueradio.cz/live", "logo": "https://play-lh.googleusercontent.com/OVowXkQsNBluCoUp0aJ5ODa_hyCWUh8lgK0qjg5-_p-FDbcDyzozLzQIWchIGrdxb43w"},
+        {"nazov": "Audio Kostel", "url": "https://evcast.mediacp.eu:1585/stream", "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Dq9U2V0N5H-Gq7o6O8v3zI9f5e-lYv-p7A&s"},
         {"nazov": "Bikers Radio Doupě", "url": "http://icecast7.play.cz/bikersradiodoupe128.mp3", "logo": "https://play-lh.googleusercontent.com/PWF_HBiICK_jfMX1nV__AB3LGECJqImhO4XnBlivN-bmhmrpuCAC7ScU7DCagjrqrw"},
         {"nazov": "Alternative Times Radio", "url": "http://ice3.abradio.cz/alternative128.mp3", "logo": "https://radia.cz/media/images/0001/01/48cd28c2dab73f011e8e64dc0919ef57a7374883.png"},
         {"nazov": "Astra Rádio", "url": "https://astra.icecast.cz/", "logo": "https://myonlineradio.cz/public/uploads/radio_img/astra-radio/fb_cover.jpg"},
@@ -151,26 +153,11 @@ def main():
     elif params.get('action') == 'list_states':
         states = [
             ("🇸🇰 [B]Slovenské Rádiá[/B]", {'country': 'sk'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/1200px-Flag_of_Slovakia.svg.png"),
-            ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png"),
-            ("🇭🇺 [I]Maďarské Rádiá (Pripravujeme)[/I]", {'action': 'coming_soon'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_Hungary.svg/1200px-Flag_of_Hungary.svg.png")
+            ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png")
         ]
         for label, p, icon in states:
             li = xbmcgui.ListItem(label=label)
             li.setArt({'icon': icon, 'thumb': icon})
-            xbmcplugin.addDirectoryItem(handle, build_url(p), li, True)
-        xbmcplugin.endOfDirectory(handle)
-
-    elif params.get('action') == 'coming_soon':
-        xbmcgui.Dialog().ok("Informácia", "Maďarské rádiá pre vás momentálne pripravujeme.")
-        xbmcplugin.endOfDirectory(handle)
-
-    elif params.get('action') == 'list_fav':
-        favs = [
-            ("⭐ [B]TOP Slovensko 10[/B]", {'action': 'top10_sk'}),
-            ("⭐ [B]TOP Česko 10[/B]", {'action': 'top10_cz'}),
-        ]
-        for label, p in favs:
-            li = xbmcgui.ListItem(label=label)
             xbmcplugin.addDirectoryItem(handle, build_url(p), li, True)
         xbmcplugin.endOfDirectory(handle)
 
@@ -193,11 +180,10 @@ def main():
         zobraz_radia(handle, radia_cz)
 
     elif params.get('action') == 'latest':
-        # Zobrazí mix posledných pridaných
-        zobraz_radia(handle, (radia_sk[:5] + radia_cz[:5]))
+        zobraz_radia(handle, (radia_cz[:3] + radia_sk[:3]))
 
-    elif params.get('action') == 'top10_sk':
-        zobraz_radia(handle, radia_sk[-10:])
+    elif params.get('action') == 'list_fav':
+        zobraz_radia(handle, radia_sk[-5:] + radia_cz[:2])
 
 def zobraz_radia(handle, zoznam):
     for radio in zoznam:
@@ -209,4 +195,4 @@ def zobraz_radia(handle, zoznam):
     xbmcplugin.endOfDirectory(handle)
 
 if __name__ == '__main__':
-    main() 
+    main()
