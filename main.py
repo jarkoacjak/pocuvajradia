@@ -17,7 +17,7 @@ def main():
     except (IndexError, ValueError):
         return
 
-    # --- KOMPLETNÁ DATABÁZA RÁDIÍ ---
+    # --- DATABÁZA RÁDIÍ ---
     radia_sk = [
         {"nazov": "Fun Rádio Leto", "url": "https://stream.funradio.sk:8000/summer128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/fun-letne-hity.webp?v=11"},
         {"nazov": "Fun Rádio Mileniálky", "url": "https://stream.funradio.sk:8000/milenialky128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/fun-milenialky.png"},
@@ -140,6 +140,8 @@ def main():
         menu_items = [
             ("🌍 [B]ŠTÁTY[/B]", {'action': 'list_states'}),
             ("🔍 [B]VYHĽADÁVANIE[/B]", {'action': 'search'}),
+            ("🆕 [B]NAJNOVŠIE PRIDANÉ[/B]", {'action': 'latest'}),
+            ("⭐ [B]OBLÚBENÉ[/B]", {'action': 'list_fav'}),
         ]
         for label, p in menu_items:
             li = xbmcgui.ListItem(label=label)
@@ -149,7 +151,7 @@ def main():
     elif params.get('action') == 'list_states':
         states = [
             ("🇸🇰 [B]Slovenské Rádiá[/B]", {'country': 'sk'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/1200px-Flag_of_Slovakia.svg.png"),
-             ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png"),
+            ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png"),
             ("🇭🇺 [B]Maďarské Rádiá[/B]", {'country': 'hu'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_Hungary.svg/1200px-Flag_of_Hungary.svg.png"),
         ]
         for label, p, flag in states:
@@ -160,23 +162,37 @@ def main():
 
     elif params.get('country'):
         country = params.get('country')
-        
         if country == 'hu':
-            # Info okno pre Maďarsko
             xbmcgui.Dialog().ok("Informácia", "Zoznam maďarských rádií sa pripravuje...")
-            # Vráti používateľa späť do zoznamu štátov
             xbmcplugin.endOfDirectory(handle, cacheToDisc=False)
             return
 
-        # Výber správnej databázy
         vybrane_radia = radia_sk if country == 'sk' else radia_cz
-        
         for stanica in vybrane_radia:
             li = xbmcgui.ListItem(label=stanica['nazov'])
             li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
             li.setInfo('music', {'title': stanica['nazov']})
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
+        xbmcplugin.endOfDirectory(handle)
+
+    # --- FUNKCIA NAJNOVŠIE PRIDANÉ ---
+    elif params.get('action') == 'latest':
+        # Vezmeme posledných 10 zo slovenskej databázy (keďže sú na konci zoznamu)
+        najnovsie = radia_sk[-10:] 
+        najnovsie.reverse() # Prevrátime, aby úplne posledné bolo prvé
+        
+        for stanica in najnovsie:
+            li = xbmcgui.ListItem(label=stanica['nazov'])
+            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
+            li.setInfo('music', {'title': stanica['nazov']})
+            li.setProperty('IsPlayable', 'true')
+            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
+        xbmcplugin.endOfDirectory(handle)
+
+    # --- FUNKCIA OBLÚBENÉ (Zatiaľ len ukážka, lebo Kodi vyžaduje ukladanie do súboru) ---
+    elif params.get('action') == 'list_fav':
+        xbmcgui.Dialog().ok("Oblúbené", "Táto funkcia bude dostupná čoskoro v ďalšej aktualizácii.")
         xbmcplugin.endOfDirectory(handle)
 
     elif params.get('action') == 'search':
