@@ -4,7 +4,7 @@ import xbmcgui
 import xbmcplugin
 
 def build_url(query):
-    return sys.argv[0] + '?' + urllib.parse.urlencode(query)
+    return sys.argv[0] + '?' + urllib.parse.parse_qsl(query)
 
 def main():
     if len(sys.argv) < 2:
@@ -132,7 +132,9 @@ def main():
         {"nazov": "Astra Rádio", "url": "https://astra.icecast.cz/", "logo": "https://myonlineradio.cz/public/uploads/radio_img/astra-radio/fb_cover.jpg"},
         {"nazov": "Rádio Kiss", "url": "https://n25a-eu.rcs.revma.com/asn0cmvb938uv", "logo": "https://i1.sndcdn.com/artworks-000055555247-hukx9y-t500x500.jpg"},
         {"nazov": "Rádio Impuls", "url": "http://icecast5.play.cz/impuls128.mp3", "logo": "https://www.impuls.cz/img/logo-impuls.png"},
-        {"nazov": "Evropa 2", "url": "https://ice.actve.net/fm-evropa2-128", "logo": "https://www.evropa2.cz/wp-content/themes/evropa2/assets/img/logo.png"}
+        {"nazov": "Evropa 2", "url": "https://ice.actve.net/fm-evropa2-128", "logo": "https://www.evropa2.cz/wp-content/themes/evropa2/assets/img/logo.png"},
+        {"nazov": "BlackFM Radio", "url": "http://icecast2.play.cz/blackfm-radio-192.mp3", "logo": "https://blackfm.cz/image/freestyle/blackfm_logo_www.jpg"},
+        {"nazov": "Blue Radio", "url": "https://stream.blueradio.cz/live", "logo": "https://stream.blueradio.cz/img/logo.png"}
     ]
 
     # --- LOGIKA MENU ---
@@ -177,7 +179,9 @@ def main():
         xbmcplugin.endOfDirectory(handle)
 
     elif params.get('action') == 'latest':
-        najnovsie = radia_sk[-10:] 
+        # Spojíme oba zoznamy a vezmeme posledných 10
+        vsetky = radia_sk + radia_cz
+        najnovsie = vsetky[-10:] 
         najnovsie.reverse()
         for stanica in najnovsie:
             li = xbmcgui.ListItem(label=stanica['nazov'])
@@ -187,16 +191,12 @@ def main():
             xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- OBLÚBENÉ: TOP 10 SK A TOP 10 CZ ---
     elif params.get('action') == 'list_fav':
-        # Definujeme Top 10 SK
-        top_sk = radia_sk[-10:] # Vyberie posledných 10 zo zoznamu SK
+        top_sk = radia_sk[-10:]
         top_sk.reverse()
-        
-        # Definujeme Top 10 CZ (keďže v zozname ich je menej, vezmeme všetky dostupné)
-        top_cz = radia_cz[:10] 
+        top_cz = radia_cz[-10:] # Tu sa teraz objavia aj nové rádiá
+        top_cz.reverse()
 
-        # Pridáme slovenský zoznam do menu
         for stanica in top_sk:
             li = xbmcgui.ListItem(label="[COLOR yellow]SK[/COLOR] " + stanica['nazov'])
             li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
@@ -204,7 +204,6 @@ def main():
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
 
-        # Pridáme český zoznam do menu
         for stanica in top_cz:
             li = xbmcgui.ListItem(label="[COLOR blue]CZ[/COLOR] " + stanica['nazov'])
             li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
