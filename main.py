@@ -176,12 +176,9 @@ def main():
             xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- FUNKCIA NAJNOVŠIE PRIDANÉ ---
     elif params.get('action') == 'latest':
-        # Vezmeme posledných 10 zo slovenskej databázy (keďže sú na konci zoznamu)
         najnovsie = radia_sk[-10:] 
-        najnovsie.reverse() # Prevrátime, aby úplne posledné bolo prvé
-        
+        najnovsie.reverse()
         for stanica in najnovsie:
             li = xbmcgui.ListItem(label=stanica['nazov'])
             li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
@@ -190,9 +187,31 @@ def main():
             xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
         xbmcplugin.endOfDirectory(handle)
 
-    # --- FUNKCIA OBLÚBENÉ (Zatiaľ len ukážka, lebo Kodi vyžaduje ukladanie do súboru) ---
+    # --- OBLÚBENÉ: TOP 10 SK A TOP 10 CZ ---
     elif params.get('action') == 'list_fav':
-        xbmcgui.Dialog().ok("Oblúbené", "Táto funkcia bude dostupná čoskoro v ďalšej aktualizácii.")
+        # Definujeme Top 10 SK
+        top_sk = radia_sk[-10:] # Vyberie posledných 10 zo zoznamu SK
+        top_sk.reverse()
+        
+        # Definujeme Top 10 CZ (keďže v zozname ich je menej, vezmeme všetky dostupné)
+        top_cz = radia_cz[:10] 
+
+        # Pridáme slovenský zoznam do menu
+        for stanica in top_sk:
+            li = xbmcgui.ListItem(label="[COLOR yellow]SK[/COLOR] " + stanica['nazov'])
+            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
+            li.setInfo('music', {'title': stanica['nazov']})
+            li.setProperty('IsPlayable', 'true')
+            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
+
+        # Pridáme český zoznam do menu
+        for stanica in top_cz:
+            li = xbmcgui.ListItem(label="[COLOR blue]CZ[/COLOR] " + stanica['nazov'])
+            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
+            li.setInfo('music', {'title': stanica['nazov']})
+            li.setProperty('IsPlayable', 'true')
+            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
+
         xbmcplugin.endOfDirectory(handle)
 
     elif params.get('action') == 'search':
@@ -201,7 +220,6 @@ def main():
             query = keyboard.lower().strip()
             vsetky_stanice = radia_sk + radia_cz
             vysledky = [r for r in vsetky_stanice if query in r['nazov'].lower()]
-            
             for stanica in vysledky:
                 li = xbmcgui.ListItem(label=stanica['nazov'])
                 li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
