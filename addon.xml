@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.audio.jarkove_radia" name="Jarkove Rádiá" version="1.0.20" provider-name="Jarko">
+<addon id="plugin.audio.pocuvam.radio" name="Počúvam Rádio" version="1.0.20" provider-name="Jarko">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -10,7 +10,7 @@
         <platform>all</platform>
         <language>sk_sk</language>
         <summary lang="sk_sk">Doplnky hudby - Slovenské a České rádiá</summary>
-        <description lang="sk_sk">Prehrávač slovenských a českých rádio staníc vytvorený pre Kodi.</description>
+        <description lang="sk_sk">Prehrávač slovenských a českých rádio staníc vytvorený pre Kodi pod názvom Počúvam Rádio.</description>
         <disclaimer lang="sk_sk">Niektoré streamy môžu vyžadovať aktívne internetové pripojenie.</disclaimer>
         <assets>
             <icon>icon.png</icon>
