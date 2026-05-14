@@ -134,7 +134,9 @@ def main():
         {"nazov": "Rádio Impuls", "url": "http://icecast5.play.cz/impuls128.mp3", "logo": "https://www.impuls.cz/img/logo-impuls.png"},
         {"nazov": "Evropa 2", "url": "https://ice.actve.net/fm-evropa2-128", "logo": "https://www.evropa2.cz/wp-content/themes/evropa2/assets/img/logo.png"},
         {"nazov": "BlackFM Radio", "url": "http://icecast2.play.cz/blackfm-radio-192.mp3", "logo": "https://blackfm.cz/image/freestyle/blackfm_logo_www.jpg"},
-        {"nazov": "Blue Radio", "url": "https://stream.blueradio.cz/live", "logo": "https://stream.blueradio.cz/img/logo.png"}
+        {"nazov": "Blue Radio", "url": "https://stream.blueradio.cz/live", "logo": "https://stream.blueradio.cz/img/logo.png"},
+        {"nazov": "Bojler Room", "url": "https://ice4.abradio.cz/bojler_room_128.aac", "logo": "https://radia.cz/media/images/0001/01/5f75dd2c71cc2919a4a9e3b9bac72f341d0780d1.svg"},
+        {"nazov": "Bus Radio", "url": "http://mpc1.mediacp.eu:8064/;", "logo": "https://static.mytuner.mobi/media/tvos_radios/ghscgzhhctun.png"}
     ]
 
     # --- LOGIKA MENU ---
@@ -179,7 +181,6 @@ def main():
         xbmcplugin.endOfDirectory(handle)
 
     elif params.get('action') == 'latest':
-        # Spojíme oba zoznamy a vezmeme posledných 10
         vsetky = radia_sk + radia_cz
         najnovsie = vsetky[-10:] 
         najnovsie.reverse()
@@ -194,7 +195,7 @@ def main():
     elif params.get('action') == 'list_fav':
         top_sk = radia_sk[-10:]
         top_sk.reverse()
-        top_cz = radia_cz[-10:] # Tu sa teraz objavia aj nové rádiá
+        top_cz = radia_cz[-10:]
         top_cz.reverse()
 
         for stanica in top_sk:
