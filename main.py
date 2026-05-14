@@ -4,7 +4,7 @@ import xbmcgui
 import xbmcplugin
 
 def build_url(query):
-    return sys.argv[0] + '?' + urllib.parse.parse_qsl(query)
+    return sys.argv[0] + '?' + urllib.parse.urlencode(query)
 
 def main():
     if len(sys.argv) < 2:
@@ -17,7 +17,9 @@ def main():
     except (IndexError, ValueError):
         return
 
-    # --- DATABÁZA RÁDIÍ ---
+    xbmcplugin.setContent(handle, 'songs')
+
+    # --- KOMPLETNÁ DATABÁZA SLOVENSKÝCH RÁDIÍ ---
     radia_sk = [
         {"nazov": "Fun Rádio Leto", "url": "https://stream.funradio.sk:8000/summer128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/fun-letne-hity.webp?v=11"},
         {"nazov": "Fun Rádio Mileniálky", "url": "https://stream.funradio.sk:8000/milenialky128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/fun-milenialky.png"},
@@ -103,18 +105,6 @@ def main():
         {"nazov": "Mars Dance Rádio", "url": "https://stream.zenolive.com/683gf5xrxfeuv?1686916511841", "logo": "https://www.radia.sk/_radia/loga/app/mars-dance.webp?v=2"},
         {"nazov": "HITRÁDIO SLOVAKIA", "url": "https://hitradioslovakia.stream.laut.fm/hitradioslovakia", "logo": "https://myonlineradio.sk/public/uploads/radio_img/hitradio-slovakia/play_250_250.webp"},
         {"nazov": "BB FM", "url": "http://stream.bbfm.sk:8000/bbfm128.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/bb-fm-radio/play_250_250.webp"},
-        {"nazov": "Rádio Regina - Západ", "url": "https://icecast.stv.livebox.sk/regina-ba_128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/regina-zapad.png"},
-        {"nazov": "Rádio Regina - Stred", "url": "https://icecast.stv.livebox.sk/regina-bb_128.mp3", "logo": "https://www.radia.sk/_radia/loga/app/regina-stred.webp?v=2"},
-        {"nazov": "Rádio Regina - Východ", "url": "https://icecast.stv.livebox.sk/regina-ke_128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/regina-vychod.png"},
-        {"nazov": "Rádio Devín", "url": "https://icecast.stv.livebox.sk/devin_128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/devin.png"},
-        {"nazov": "Europa 2", "url": "https://stream.bauermedia.sk/europa2-hi.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/europa2.png"},
-        {"nazov": "Dobré Rádio", "url": "https://stream.dobreradio.sk/dobreradio.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/dobre.png"},
-        {"nazov": "Rádio InfoVojna", "url": "https://stream1.infovojna.com:8000/live", "logo": "https://topradio.sk/_next/image?url=%2Fimages%2Finfovojna.jpg&w=640&q=75"},
-        {"nazov": "Rádio_FM", "url": "https://icecast.stv.livebox.sk/fm_128.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/fm.png"},
-        {"nazov": "Rádio Dychovka", "url": "https://epanel.mediacp.eu:7661/stream", "logo": "https://www.radia.sk/_radia/loga/app/dychovka.webp?v=1"},
-        {"nazov": "Rádio Košice", "url": "http://stream.ecce.sk:8000/radiokosice-128.mp3", "logo": "https://data.tvkosice.sk/images/cm/1000x0xresize/r/a/d/radiokosice/8e/fe/8efe9b31-bd08-4f5d-9168-fa656184fdd2.jpg"},
-        {"nazov": "FIT Family RADIO", "url": "http://solid67.streamupsolutions.com:8052/;", "logo": "https://www.radia.sk/_radia/loga/app/fit-family.webp?v=1"},
-        {"nazov": "Rádio WOW", "url": "https://radioserver.online:9816/radiowow.mp3", "logo": "https://www.radia.sk/_radia/loga/coverflow/wow.png"},
         {"nazov": "Rádio Slovensko", "url": "https://icecast.stv.livebox.sk/slovensko_128.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-slovensko/play_250_250.webp"},
         {"nazov": "Detské Rádio", "url": "https://stream.21.sk/detskeradio-192.mp3", "logo": "https://data.tvkosice.sk/images/cm/1000x0xresize/r/a/d/radiokosice/08/80/0880daa2-a629-4ce0-9bf9-ab7765572c2f.jpg"},
         {"nazov": "Rádio Frontinus", "url": "http://stream.frontinus.sk:8000/frontinus128.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-frontinus/play_250_250.webp"},
@@ -125,27 +115,12 @@ def main():
         {"nazov": "Rádio Vlna", "url": "http://stream.radiovlna.sk/vlna-hi.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-vlna/play_250_250.webp"}
     ]
 
-    radia_cz = [
-        {"nazov": "Audio Kostel", "url": "https://evcast.mediacp.eu:1585/stream", "logo": "https://lh3.googleusercontent.com/proxy/audio-kostel-placeholder"},
-        {"nazov": "Bikers Radio Doupě", "url": "http://icecast7.play.cz/bikersradiodoupe128.mp3", "logo": "https://play-lh.googleusercontent.com/PWF_HBiICK_jfMX1nV__AB3LGECJqImhO4XnBlivN-bmhmrpuCAC7ScU7DCagjrqrw"},
-        {"nazov": "Alternative Times Radio", "url": "http://ice3.abradio.cz/alternative128.mp3", "logo": "https://radia.cz/media/images/0001/01/48cd28c2dab73f011e8e64dc0919ef57a7374883.png"},
-        {"nazov": "Astra Rádio", "url": "https://astra.icecast.cz/", "logo": "https://myonlineradio.cz/public/uploads/radio_img/astra-radio/fb_cover.jpg"},
-        {"nazov": "Rádio Kiss", "url": "https://n25a-eu.rcs.revma.com/asn0cmvb938uv", "logo": "https://i1.sndcdn.com/artworks-000055555247-hukx9y-t500x500.jpg"},
-        {"nazov": "Rádio Impuls", "url": "http://icecast5.play.cz/impuls128.mp3", "logo": "https://www.impuls.cz/img/logo-impuls.png"},
-        {"nazov": "Evropa 2", "url": "https://ice.actve.net/fm-evropa2-128", "logo": "https://www.evropa2.cz/wp-content/themes/evropa2/assets/img/logo.png"},
-        {"nazov": "BlackFM Radio", "url": "http://icecast2.play.cz/blackfm-radio-192.mp3", "logo": "https://blackfm.cz/image/freestyle/blackfm_logo_www.jpg"},
-        {"nazov": "Blue Radio", "url": "https://stream.blueradio.cz/live", "logo": "https://stream.blueradio.cz/img/logo.png"},
-        {"nazov": "Bojler Room", "url": "https://ice4.abradio.cz/bojler_room_128.aac", "logo": "https://radia.cz/media/images/0001/01/5f75dd2c71cc2919a4a9e3b9bac72f341d0780d1.svg"},
-        {"nazov": "Bus Radio", "url": "http://mpc1.mediacp.eu:8064/;", "logo": "https://static.mytuner.mobi/media/tvos_radios/ghscgzhhctun.png"}
-    ]
-
     # --- LOGIKA MENU ---
     if not params:
         menu_items = [
             ("🌍 [B]ŠTÁTY[/B]", {'action': 'list_states'}),
             ("🔍 [B]VYHĽADÁVANIE[/B]", {'action': 'search'}),
             ("🆕 [B]NAJNOVŠIE PRIDANÉ[/B]", {'action': 'latest'}),
-            ("⭐ [B]OBLÚBENÉ[/B]", {'action': 'list_fav'}),
         ]
         for label, p in menu_items:
             li = xbmcgui.ListItem(label=label)
@@ -156,7 +131,6 @@ def main():
         states = [
             ("🇸🇰 [B]Slovenské Rádiá[/B]", {'country': 'sk'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/1200px-Flag_of_Slovakia.svg.png"),
             ("🇨🇿 [B]České Rádiá[/B]", {'country': 'cz'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png"),
-            ("🇭🇺 [B]Maďarské Rádiá[/B]", {'country': 'hu'}, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_Hungary.svg/1200px-Flag_of_Hungary.svg.png"),
         ]
         for label, p, flag in states:
             li = xbmcgui.ListItem(label=label)
@@ -166,60 +140,25 @@ def main():
 
     elif params.get('country'):
         country = params.get('country')
-        if country == 'hu':
-            xbmcgui.Dialog().ok("Informácia", "Zoznam maďarských rádií sa pripravuje...")
-            xbmcplugin.endOfDirectory(handle, cacheToDisc=False)
-            return
-
-        vybrane_radia = radia_sk if country == 'sk' else radia_cz
-        for stanica in vybrane_radia:
-            li = xbmcgui.ListItem(label=stanica['nazov'])
-            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
-            li.setInfo('music', {'title': stanica['nazov']})
-            li.setProperty('IsPlayable', 'true')
-            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
-        xbmcplugin.endOfDirectory(handle)
-
-    elif params.get('action') == 'latest':
-        vsetky = radia_sk + radia_cz
-        najnovsie = vsetky[-10:] 
-        najnovsie.reverse()
-        for stanica in najnovsie:
-            li = xbmcgui.ListItem(label=stanica['nazov'])
-            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
-            li.setInfo('music', {'title': stanica['nazov']})
-            li.setProperty('IsPlayable', 'true')
-            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
-        xbmcplugin.endOfDirectory(handle)
-
-    elif params.get('action') == 'list_fav':
-        top_sk = radia_sk[-10:]
-        top_sk.reverse()
-        top_cz = radia_cz[-10:]
-        top_cz.reverse()
-
-        for stanica in top_sk:
-            li = xbmcgui.ListItem(label="[COLOR yellow]SK[/COLOR] " + stanica['nazov'])
-            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
-            li.setInfo('music', {'title': stanica['nazov']})
-            li.setProperty('IsPlayable', 'true')
-            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
-
-        for stanica in top_cz:
-            li = xbmcgui.ListItem(label="[COLOR blue]CZ[/COLOR] " + stanica['nazov'])
-            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
-            li.setInfo('music', {'title': stanica['nazov']})
-            li.setProperty('IsPlayable', 'true')
-            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
-
+        if country == 'sk':
+            for stanica in radia_sk:
+                li = xbmcgui.ListItem(label=stanica['nazov'])
+                li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
+                li.setInfo('music', {'title': stanica['nazov']})
+                li.setProperty('IsPlayable', 'true')
+                xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
+        elif country == 'cz':
+            # INFORMÁCIA PRE ČESKÉ RÁDIÁ
+            li = xbmcgui.ListItem(label="[I]🇨🇿 České rádiá - Informáciu pripravujeme...[/I]")
+            li.setArt({'thumb': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/1200px-Flag_of_the_Czech_Republic.svg.png"})
+            xbmcplugin.addDirectoryItem(handle, "", li, False)
         xbmcplugin.endOfDirectory(handle)
 
     elif params.get('action') == 'search':
         keyboard = xbmcgui.Dialog().input('Hľadať rádio', type=xbmcgui.INPUT_ALPHANUM)
         if keyboard:
             query = keyboard.lower().strip()
-            vsetky_stanice = radia_sk + radia_cz
-            vysledky = [r for r in vsetky_stanice if query in r['nazov'].lower()]
+            vysledky = [r for r in radia_sk if query in r['nazov'].lower()]
             for stanica in vysledky:
                 li = xbmcgui.ListItem(label=stanica['nazov'])
                 li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
@@ -227,8 +166,17 @@ def main():
                 li.setProperty('IsPlayable', 'true')
                 xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
             xbmcplugin.endOfDirectory(handle)
-        else:
-            xbmcplugin.endOfDirectory(handle)
+
+    elif params.get('action') == 'latest':
+        # Zobrazenie posledných pridaných slovenských rádií
+        for stanica in radia_sk[-20:]:
+            li = xbmcgui.ListItem(label=stanica['nazov'])
+            li.setArt({'thumb': stanica['logo'], 'icon': stanica['logo']})
+            li.setInfo('music', {'title': stanica['nazov']})
+            li.setProperty('IsPlayable', 'true')
+            xbmcplugin.addDirectoryItem(handle, stanica['url'], li, False)
+        xbmcplugin.endOfDirectory(handle)
 
 if __name__ == '__main__':
     main()
+    
