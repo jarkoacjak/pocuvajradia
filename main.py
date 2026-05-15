@@ -4,7 +4,7 @@ import xbmcgui
 import xbmcplugin
 
 def build_url(query):
-    # Funkcia na vytváranie odkazov medzi menu
+    # Funkcia na správne generovanie odkazov v menu
     return sys.argv[0] + '?' + urllib.parse.urlencode(query)
 
 def main():
@@ -12,10 +12,10 @@ def main():
     arg_string = sys.argv[2][1:]
     params = dict(urllib.parse.parse_qsl(arg_string))
 
-    # Nastavenie názvu a typu obsahu pre Kodi
+    # Nastavenie typu obsahu na hudbu pre lepšie zobrazenie
     xbmcplugin.setContent(handle, 'songs')
-    
-    # --- DATABÁZA RÁDIÍ ---
+
+    # --- KOMPLETNÁ DATABÁZA RÁDIÍ ---
     radia_sk = [
         {"nazov": "Fun Rádio Leto", "url": "https://stream.funradio.sk:8000/summer128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/fun-letne-hity.webp?v=11"},
         {"nazov": "Fun Rádio Mileniálky", "url": "https://stream.funradio.sk:8000/milenialky128.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/fun-milenialky.png"},
@@ -137,31 +137,36 @@ def main():
         {"nazov": "Bus Radio", "url": "http://mpc1.mediacp.eu:8064/;", "logo": "https://static.mytuner.mobi/media/tvos_radios/ghscgzhhctun.png"}
     ]
 
-    # --- LOGIKA MENU ---
+# --- LOGIKA MENU ---
     action = params.get('action')
 
     if action is None:
-        # Hlavné menu doplnku "Hudba: Počúvam Rádiá"
-        # Sekcia Slovensko
+        # HLAVNÉ MENU DOPLNKU
+        # Ikona pre Slovensko
         url_sk = build_url({'action': 'list', 'country': 'sk'})
         li_sk = xbmcgui.ListItem(label='[B][COLOR yellow]Hudba:[/COLOR] 🇸🇰 Slovenské rádiá[/B]')
-        li_sk.setArt({'icon': 'DefaultMusicPlaylists.png'})
+        li_sk.setArt({
+            'icon': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/250px-Flag_of_Slovakia.svg.png',
+            'thumb': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/250px-Flag_of_Slovakia.svg.png'
+        })
         xbmcplugin.addDirectoryItem(handle, url_sk, li_sk, isFolder=True)
 
-        # Sekcia Česko
+        # Ikona pre Česko
         url_cz = build_url({'action': 'list', 'country': 'cz'})
         li_cz = xbmcgui.ListItem(label='[B][COLOR yellow]Hudba:[/COLOR] 🇨🇿 České rádiá[/B]')
-        li_cz.setArt({'icon': 'DefaultMusicPlaylists.png'})
+        li_cz.setArt({
+            'icon': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/250px-Flag_of_the_Czech_Republic.svg.png',
+            'thumb': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/250px-Flag_of_the_Czech_Republic.svg.png'
+        })
         xbmcplugin.addDirectoryItem(handle, url_cz, li_cz, isFolder=True)
 
     elif action == 'list':
-        # Podmenu so zoznamom staníc
+        # ZOZNAM STANÍC
         country = params.get('country')
         vybrane_radia = radia_sk if country == 'sk' else radia_cz
 
         for radio in vybrane_radia:
             li = xbmcgui.ListItem(label=radio['nazov'])
-            # Nastavenie loga pre stanicu
             li.setArt({
                 'thumb': radio['logo'], 
                 'icon': radio['logo'], 
@@ -169,11 +174,8 @@ def main():
             })
             li.setInfo('music', {'title': radio['nazov']})
             li.setProperty('IsPlayable', 'true')
-            
-            # Pridanie stanice do zoznamu
             xbmcplugin.addDirectoryItem(handle, radio['url'], li, isFolder=False)
 
-    # Ukončenie adresára pre správne vykreslenie v Kodi
     xbmcplugin.endOfDirectory(handle)
 
 if __name__ == '__main__':
