@@ -141,10 +141,6 @@ def main():
     action = params.get('action')
 
     if action is None:
-        # --- LOGIKA MENU ---
-    action = params.get('action')
-
-    if action is None:
         # Hlavné menu doplnku "Hudba: Počúvam Rádiá"
         # Sekcia Slovensko
         url_sk = build_url({'action': 'list', 'country': 'sk'})
