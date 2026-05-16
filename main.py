@@ -79,9 +79,9 @@ def main():
         {"nazov": "Rádio Folk", "url": "https://mpc1.mediacp.eu/stream/demo2", "logo": "https://www.radiofolk.sk/wp-content/uploads/2021/08/cropped-cropped-cropped-Logo-pre-web.png"},
         {"nazov": "Rádio Biblia", "url": "http://radiobiblia.online:8000/stream.ogg", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-biblia/play_250_250.webp"},
         {"nazov": "Rádio Extra", "url": "http://live.topradio.cz:8000/extra192", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-extra/fb_cover.jpg"},
-        {"nazov": "Rádio Beta Česko a Slovenské Hity", "url": "http://109.71.67.102:8000/beta_cspop.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/beta-cz-sk-hity.webp?v=1"},
-        {"nazov": "Rádio Beta 80'S a 90'S", "url": "http://109.71.67.102:8000/beta_80a90.mp3", "logo": "https://cdn.radia.sk/_radia/loga/app/beta-hity-80s-90s.webp?v=1"},
-        {"nazov": "Rádio Beta Hráme jubilantom", "url": "http://109.71.67.102:8000/beta_jubilanti.mp3", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/beta-hrame-jubilantom.png"},
+        {"nazov": "Rádio Beta Česko a Slovenské Hity", "url": "http://109.71.67.102:8000/beta_cspop.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-beta/play_250_250.webp"},
+        {"nazov": "Rádio Beta 80'S a 90'S", "url": "http://109.71.67.102:8000/beta_80a90.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-beta/play_250_250.webp"},
+        {"nazov": "Rádio Beta Hráme jubilantom", "url": "http://109.71.67.102:8000/beta_jubilanti.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-beta/play_250_250.webp"},
         {"nazov": "Rádio Bela", "url": "http://65.109.81.84:8855/live", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/bela.png"},
         {"nazov": "Rádio Best FM", "url": "https://stream3.bestfm.sk:8000/160.aac", "logo": "https://bestfm.sk/wp-content/uploads/2021/09/logo_transparent.png"},
         {"nazov": "Rádio Basavel", "url": "https://stream.zeno.fm/6gd9c6yn4nhvv", "logo": "https://cdn.radia.sk/_radia/loga/coverflow/basavel.png"},
@@ -123,7 +123,9 @@ def main():
         {"nazov": "Rádio Vlna", "url": "http://stream.radiovlna.sk/vlna-hi.mp3", "logo": "https://myonlineradio.sk/public/uploads/radio_img/radio-vlna/play_250_250.webp"}
     ]
 
-    radia_cz = [
+radia_cz = [
+        {"nazov": "Calimeroclub", "url": "http://live.topradio.cz:8000/calimero192", "logo": "https://www.calimeroclub.eu/img/picture/231/logo-cali.jpg"},
+        {"nazov": "Classic Praha", "url": "https://icecast8.play.cz/classic128.mp3", "logo": "https://www.classicpraha.cz/static/images/social-logo.png"},
         {"nazov": "Audio Kostel", "url": "https://evcast.mediacp.eu:1585/stream", "logo": "https://www.kostel.cz/logo.png"},
         {"nazov": "Bikers Radio Doupě", "url": "http://icecast7.play.cz/bikersradiodoupe128.mp3", "logo": "https://www.bikersradio.cz/images/logo.png"},
         {"nazov": "Alternative Times Radio", "url": "http://ice3.abradio.cz/alternative128.mp3", "logo": "https://radia.cz/media/images/0001/01/48cd28c2dab73f011e8e64dc0919ef57a7374883.png"},
@@ -137,7 +139,7 @@ def main():
         {"nazov": "Bus Radio", "url": "http://mpc1.mediacp.eu:8064/;", "logo": "https://static.mytuner.mobi/media/tvos_radios/ghscgzhhctun.png"}
     ]
 
-# --- LOGIKA MENU ---
+    # --- LOGIKA MENU ---
     action = params.get('action')
 
     if action is None:
